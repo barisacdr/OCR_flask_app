@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .model-results {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+        .image-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>OCR Results</h1>
+
+    {% for index in range(image_paths | length) %}
+        <div class="image-container">
+            <h2>Processed Image {{ index + 1 }}</h2>
+            <img src="{{ url_for('uploaded_file', filename=image_paths[index], _external=True) }}" alt="Processed Image {{ index + 1 }}">
+        </div>
+        
+        {% for model, texts in results.items() %}
+            <div class="model-results">
+                <h2>{{ model }} Results for Image {{ index + 1 }}:</h2>
+                <pre>{{ texts[index] }}</pre>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <a href="{{ url_for('index', _external=True) }}">Process another file</a>
+</body>
+</html>
