@@ -123,8 +123,8 @@ These steps help in detecting text on various background colors and improve over
 
 ### Home Page
 
-![Home Page](screenshots/home_page.PNG)
+![Home Page](screenshots/home_page.png)
 
 ### Results Page
 
-![Results Page](screenshots/results_page.PNG)
+![Results Page](screenshots/results_page.png)
